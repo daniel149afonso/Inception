@@ -4,3 +4,18 @@ services:
     container_name: mariadb
     env_file:
       - ../.env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    env_file:
+      - ../.env
+
+volumes:
+  mariadb_data: #Volume docker
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/daniel/data/mariadb # data stored in the host
