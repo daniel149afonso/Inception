@@ -6,7 +6,13 @@ RUN apt-get update && \
     apt-get install -y \
     php7.4-fpm \
     php7.4-mysql \
-    wget
+    wget \
+    tar
+
+RUN mkdir -p /var/www/html && \
+    wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz && \
+    tar -xzf /tmp/wordpress.tar.gz -C /tmp && \
+    cp -r /tmp/wordpress/* /var/www/html/
 
 COPY script.sh /script.sh
 
