@@ -16,6 +16,12 @@ chown mysql:mysql /run/mysqld
 # start Mariadb, crate socket, start server, open the port
 mariadb 
 
+# show the host and his ip address
+getent hosts mariadb
+
+# check the env variables
+docker exec mariadb env | grep MYSQL
+
 # show status of container
 docker ps
 
