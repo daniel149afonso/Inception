@@ -7,7 +7,11 @@ RUN apt-get update && \
     php7.4-fpm \
     php7.4-mysql \
     wget \
-    tar
+    tar \
+    mariadb-client
+
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp && \
+    chmod +x /usr/local/bin/wp
 
 RUN mkdir -p /var/www/html && \
     wget https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz && \

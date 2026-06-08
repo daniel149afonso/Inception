@@ -19,6 +19,15 @@ mariadb
 # show the host and his ip address
 getent hosts mariadb
 
+# show the TCP listening ports of the container (0.0.0.0 means all  network interfaces)
+docker exec mariadb ss -ltnp
+
+# connect to mariadb (to use in the wordpress container)
+php -r '$c = new mysqli("mariadb", "wpuser", "TON_MOT_DE_PASSE", "wordpress"); if ($c->connect_error) { echo "ERREUR: ".$c->connect_error.PHP_EOL; exit(1); } echo "OK connexion MariaDB".PHP_EOL;'
+
+# check if WP-CLI exist in wordpress container
+docker exec wordpress wp --info --allow-root
+ 
 # check the env variables
 docker exec mariadb env | grep MYSQL
 
