@@ -6,11 +6,17 @@ services:
       - .env
     volumes:
       - mariadb_data:/var/lib/mysql
+    restart: unless-stopped
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
     env_file:
       - .env
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception
+    restart: unless-stopped
 
 volumes:
   mariadb_data: #Volume docker
@@ -19,3 +25,13 @@ volumes:
       type: none
       o: bind
       device: /home/daniel/data/mariadb # data stored in the host
+  wordpress_data:   
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/daniel/data/wordpress
+
+networks:
+  inception:
+    driver: bridge

@@ -27,7 +27,13 @@ php -r '$c = new mysqli("mariadb", "wpuser", "TON_MOT_DE_PASSE", "wordpress"); i
 
 # check if WP-CLI exist in wordpress container
 docker exec wordpress wp --info --allow-root
- 
+
+# list all registered wordpress users
+docker exec wordpress bash -c 'cd /var/www/html && wp user list --allow-root'
+
+# 
+docker inspect wordpress --format '{{ range .Mounts }}{{ .Name }} -> {{ .Destination }}{{ println }}{{ end }}'
+
 # check the env variables
 docker exec mariadb env | grep MYSQL
 
@@ -49,6 +55,14 @@ docker logs mariadb
 # show all saved docker images
 docker images
 
+# show all docker volumes
+docker volume ls
+
+# show all docker networks
+docker network ls
+
+# show restart policy
+docker inspect wordpress --format '{{ .HostConfig.RestartPolicy.Name }}'
 
 Conteneur MariaDB
 │
