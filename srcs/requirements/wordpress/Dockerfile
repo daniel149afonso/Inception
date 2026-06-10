@@ -18,6 +18,9 @@ RUN mkdir -p /var/www/html && \
     tar -xzf /tmp/wordpress.tar.gz -C /tmp && \
     cp -r /tmp/wordpress/* /var/www/html/
 
+RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 9000|' \
+    /etc/php/7.4/fpm/pool.d/www.conf
+
 COPY script.sh /script.sh
 
 RUN chmod +x /script.sh

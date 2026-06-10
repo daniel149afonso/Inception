@@ -17,6 +17,14 @@ services:
     networks:
       - inception
     restart: unless-stopped
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    restart: unless-stopped
+    networks:
+      - inception
+    volumes:
+      - wordpress_data:/var/www/html
 
 volumes:
   mariadb_data: #Volume docker
