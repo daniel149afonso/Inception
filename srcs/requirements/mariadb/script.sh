@@ -7,7 +7,9 @@ chown mysql:mysql /run/mysqld
 if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     mariadbd --user=mysql &
 
-    sleep 5
+    until mariadb -u root -p"${MYSQL_ROOT_PASSWORD}" -e "SELECT 1"; do
+        sleep 2
+    done
 
     mariadb -u root << EOF
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};

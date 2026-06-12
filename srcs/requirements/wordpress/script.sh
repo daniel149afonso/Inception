@@ -1,7 +1,19 @@
 #!/bin/bash
 
+set -e
+
 mkdir -p /run/php
 
+echo "Waiting for MariaDB..."
+
+# Attente DB (root = fiable)
+until mysqladmin ping -hmariadb -uroot -p"${MYSQL_ROOT_PASSWORD}" --silent; do
+    sleep 2
+done
+
+echo "MariaDB is ready"
+
+# Config WordPress (idempotent)
 if [ ! -f /var/www/html/wp-config.php ]; then
     cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
@@ -13,13 +25,17 @@ fi
 
 cd /var/www/html
 
+# Installation WordPress sécurisée
 if ! wp core is-installed --allow-root; then
+    echo "Installing WordPress..."
+
     wp core install \
         --url="https://daniel.42.fr" \
         --title="Inception" \
         --admin_user="${WP_ADMIN_USER}" \
         --admin_password="${WP_ADMIN_PASSWORD}" \
         --admin_email="${WP_ADMIN_EMAIL}" \
+        --skip-email \
         --allow-root
 
     wp user create \
@@ -29,5 +45,7 @@ if ! wp core is-installed --allow-root; then
         --role=author \
         --allow-root
 fi
+
+echo "Starting PHP-FPM..."
 
 exec php-fpm7.4 -F
