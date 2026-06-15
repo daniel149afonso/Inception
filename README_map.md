@@ -27,6 +27,9 @@ docker exec mariadb ss -ltnp
 # connect to mariadb (to use in the wordpress container)
 php -r '$c = new mysqli("mariadb", "wpuser", "TON_MOT_DE_PASSE", "wordpress"); if ($c->connect_error) { echo "ERREUR: ".$c->connect_error.PHP_EOL; exit(1); } echo "OK connexion MariaDB".PHP_EOL;'
 
+# connect to the server
+curl -k https://localhost
+
 # check if WP-CLI exist in wordpress container
 docker exec wordpress wp --info --allow-root
 
