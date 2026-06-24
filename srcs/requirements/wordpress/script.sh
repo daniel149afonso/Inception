@@ -30,7 +30,7 @@ if ! wp core is-installed --allow-root; then
     echo "Installing WordPress..."
 
     wp core install \
-        --url="https://${DOMAIN_NAME}.42.fr" \
+        --url="https://daafonso.42.fr" \
         --title="Inception" \
         --admin_user="${WP_ADMIN_USER}" \
         --admin_password="${WP_ADMIN_PASSWORD}" \

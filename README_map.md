@@ -83,3 +83,6 @@ Conteneur MariaDB
 volume Docker
         ↓
 /var/lib/mysql
+
+# à faire
+sur les machines de l'école modifier daniel par daafonso pour les volumes docker
