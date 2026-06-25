@@ -1,4 +1,5 @@
 services:
+  # Mariadb
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
@@ -9,6 +10,8 @@ services:
     networks:
       - inception
     restart: unless-stopped
+
+  # Wordpress
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -19,6 +22,8 @@ services:
     networks:
       - inception
     restart: unless-stopped
+  
+  # Nginx
   nginx:
     ports:
       - "443:443"
@@ -30,6 +35,7 @@ services:
     volumes:
       - wordpress_data:/var/www/html
 
+# Volumes
 volumes:
   mariadb_data: #Volume docker
     driver: local
@@ -44,6 +50,7 @@ volumes:
       o: bind
       device: /home/daniel/data/wordpress
 
+# Networks 
 networks:
   inception:
     driver: bridge

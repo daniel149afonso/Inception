@@ -232,6 +232,11 @@ docker exec nginx nc -zv wordpress 9000
 openssl s_client -connect localhost:443 -tls1_2
 ```
 
+```bash
+openssl s_client \
+    -connect daafonso.42.fr:443 \
+    -servername daafonso.42.fr
+```
 Expected:
 
 ```text
