@@ -2,13 +2,16 @@
 # Download Debian Bullseye
 FROM debian:bullseye
 
+# install redis extension to use redis
 RUN apt-get update && \
     apt-get install -y \
     php7.4-fpm \
     php7.4-mysql \
+    php-redis \ 
     wget \
     tar \
-    mariadb-client
+    mariadb-client && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp && \
     chmod +x /usr/local/bin/wp

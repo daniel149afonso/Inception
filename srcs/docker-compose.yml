@@ -34,6 +34,31 @@ services:
       - inception
     volumes:
       - wordpress_data:/var/www/html
+   
+  adminer:
+    build: ./requirements/adminer
+    container_name: adminer
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: unless-stopped
+  
+  ftp:
+    build: ./requirements/ftp
+    container_name: ftp
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: unless-stopped
+
+  redis:
+    build: ./requirements/redis
+    container_name: redis
+    networks:
+      - inception
+    restart: unless-stopped
 
 # Volumes
 volumes:

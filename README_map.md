@@ -1,4 +1,5 @@
-à check redirige vers login.intra
+# redis
+Redis sert de cache pour WordPress : au lieu que WordPress redemande toujours certaines informations à MariaDB, il peut stocker temporairement des résultats dans Redis. Il sert seulement à accélérer certaines requêtes répétées.
 
 # Create the container and use the existant image (if you didn't change the Dockerfile)
 docker compose up -d (start all container wordpress, nginx too. -d -> for detached mode make you free)
@@ -83,6 +84,14 @@ Conteneur MariaDB
 volume Docker
         ↓
 /var/lib/mysql
+
+# Bonus:
+
+# list all wordpress plugin 
+wp plugin list --allow-root
+
+# redis status (in wordpress container)
+wp --path=/var/www/html redis status --allow-root
 
 # à faire
 sur les machines de l'école modifier daniel par daafonso pour les volumes docker
