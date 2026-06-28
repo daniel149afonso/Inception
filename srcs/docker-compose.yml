@@ -44,13 +44,15 @@ services:
       - inception
     restart: unless-stopped
   
-  ftp:
-    build: ./requirements/ftp
-    container_name: ftp
-    env_file:
-      - .env
+  vsftpd:
+    ports:
+      - "21:21"
+    build: ./requirements/vsftpd
+    container_name: vsftpd
     networks:
       - inception
+    volumes:
+      - wordpress_data:/var/www/html
     restart: unless-stopped
 
   redis:

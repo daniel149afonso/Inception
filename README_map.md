@@ -1,5 +1,5 @@
 # redis
-Redis sert de cache pour WordPress : au lieu que WordPress redemande toujours certaines informations à MariaDB, il peut stocker temporairement des résultats dans Redis. Il sert seulement à accélérer certaines requêtes répétées.
+Redis sert de cache pour WordPress : au lieu que WordPress redemande toujours certaines informations à MariaDB, il peut stocker temporairement des résultats dans Redis. Il sert à éviter de refaire certaines requêtes SQL.
 
 # Create the container and use the existant image (if you didn't change the Dockerfile)
 docker compose up -d (start all container wordpress, nginx too. -d -> for detached mode make you free)
@@ -92,6 +92,18 @@ wp plugin list --allow-root
 
 # redis status (in wordpress container)
 wp --path=/var/www/html redis status --allow-root
+
+# enter in redis container
+docker exec -it redis redis-cli
+
+# list all db caches
+INFO keyspace
+
+# count the number of keys
+DBSIZE
+
+# delete all caches
+FLUSHDB
 
 # à faire
 sur les machines de l'école modifier daniel par daafonso pour les volumes docker
