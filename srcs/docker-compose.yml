@@ -47,6 +47,9 @@ services:
   vsftpd:
     ports:
       - "21:21"
+      - "30000-30010:30000-30010"
+    env_file:
+      - .env
     build: ./requirements/vsftpd
     container_name: vsftpd
     networks:

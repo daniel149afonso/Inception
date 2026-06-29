@@ -105,5 +105,14 @@ DBSIZE
 # delete all caches
 FLUSHDB
 
+# show ftp port
+docker port vsftpd
+
+# show ftp user
+id $FTP_USER
+
+# show ftp share the same volume
+ls -la /var/www/html
+
 # à faire
 sur les machines de l'école modifier daniel par daafonso pour les volumes docker
