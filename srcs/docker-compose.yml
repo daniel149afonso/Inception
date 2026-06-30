@@ -36,6 +36,8 @@ services:
       - wordpress_data:/var/www/html
    
   adminer:
+    ports:
+      - "8080:8080"
     build: ./requirements/adminer
     container_name: adminer
     env_file:
@@ -61,6 +63,15 @@ services:
   redis:
     build: ./requirements/redis
     container_name: redis
+    networks:
+      - inception
+    restart: unless-stopped
+
+  static:
+    build: ./requirements/static
+    container_name: static
+    ports:
+      - "8081:80"
     networks:
       - inception
     restart: unless-stopped

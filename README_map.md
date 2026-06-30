@@ -114,5 +114,12 @@ id $FTP_USER
 # show ftp share the same volume
 ls -la /var/www/html
 
+# web broswer adminer
+http://localhost:8080
+
+server: mariadb
+user: MYSQL_USER
+password: MYSQL_PASSWORD
+
 # à faire
 sur les machines de l'école modifier daniel par daafonso pour les volumes docker
