@@ -121,5 +121,12 @@ server: mariadb
 user: MYSQL_USER
 password: MYSQL_PASSWORD
 
+# check trivy version
+docker exec -it trivy trivy --version
+
+# scan trivy
+docker exec trivy trivy image nginx
+
 # à faire
 sur les machines de l'école modifier daniel par daafonso pour les volumes docker
+Modifier dans le makefile le chemin vers les volumes

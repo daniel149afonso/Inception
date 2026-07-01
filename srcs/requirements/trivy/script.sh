@@ -2,6 +2,6 @@
 
 set -e
 
-echo "Starting static website..."
+echo "Trivy container is ready."
 
-exec nginx -g "daemon off;"
+tail -f /dev/null # running the container without stopping

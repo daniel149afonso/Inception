@@ -34,7 +34,8 @@ services:
       - inception
     volumes:
       - wordpress_data:/var/www/html
-   
+
+  # adminer 
   adminer:
     ports:
       - "8080:8080"
@@ -46,6 +47,7 @@ services:
       - inception
     restart: unless-stopped
   
+  # vsftpd
   vsftpd:
     ports:
       - "21:21"
@@ -60,6 +62,7 @@ services:
       - wordpress_data:/var/www/html
     restart: unless-stopped
 
+  # redis
   redis:
     build: ./requirements/redis
     container_name: redis
@@ -67,6 +70,7 @@ services:
       - inception
     restart: unless-stopped
 
+  # static website
   static:
     build: ./requirements/static
     container_name: static
@@ -74,6 +78,16 @@ services:
       - "8081:80"
     networks:
       - inception
+    restart: unless-stopped
+
+  # trivy
+  trivy:
+    build: ./requirements/trivy
+    container_name: trivy
+    networks:
+      - inception
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
 
 # Volumes
@@ -90,6 +104,8 @@ volumes:
       type: none
       o: bind
       device: /home/daniel/data/wordpress
+
+
 
 # Networks 
 networks:
