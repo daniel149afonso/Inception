@@ -125,7 +125,10 @@ password: MYSQL_PASSWORD
 docker exec -it trivy trivy --version
 
 # scan trivy
-docker exec trivy trivy image nginx
+docker exec trivy trivy image srcs-nginx
+
+# scan trivy only HIGH, CRITICAL
+docker exec trivy trivy image srcs-nginx --severity HIGH,CRITICAL
 
 # à faire
 sur les machines de l'école modifier daniel par daafonso pour les volumes docker
