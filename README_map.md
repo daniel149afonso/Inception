@@ -19,6 +19,9 @@ chown mysql:mysql /run/mysqld
 # start Mariadb, create socket, start server, open the port
 mariadb -u root -p
 
+# Sql commands to test
+USE db_name, SELECT DATABASE(), SHOW TABLES
+
 # show the host and his ip address
 getent hosts mariadb
 
