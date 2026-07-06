@@ -22,11 +22,11 @@ services:
     networks:
       - inception
     restart: unless-stopped
-  
+
   # Nginx
   nginx:
     ports:
-      - "443:443"
+      - "443:443" #host port (your machine's port): the container port
     build: ./requirements/nginx
     container_name: nginx
     restart: unless-stopped
@@ -35,7 +35,7 @@ services:
     volumes:
       - wordpress_data:/var/www/html
 
-  # adminer 
+  # adminer
   adminer:
     ports:
       - "8080:8080"
@@ -46,7 +46,7 @@ services:
     networks:
       - inception
     restart: unless-stopped
-  
+
   # vsftpd
   vsftpd:
     ports:
@@ -97,17 +97,17 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/daniel/data/mariadb # data stored in the host
-  wordpress_data:   
+      device: /home/daafonso/data/mariadb # data stored in the host
+  wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/daniel/data/wordpress
+      device: /home/daafonso/data/wordpress
 
 
 
-# Networks 
+# Networks
 networks:
   inception:
     driver: bridge
