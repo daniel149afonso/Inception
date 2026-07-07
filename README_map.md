@@ -27,7 +27,7 @@ which mariadbd
 chown mysql:mysql /run/mysqld
 
 # start Mariadb, create socket, start server, open the port
-mariadb -u root -p
+mariadb -u root -p"$MYSQL_ROOT_PASSWORD"
 
 # Sql commands to test
 USE db_name, SELECT DATABASE(), SHOW TABLES
@@ -100,17 +100,17 @@ volume Docker
 
 # Bonus:
 
-# list all wordpress plugin
+# list all wordpress plugin DANGER
 wp plugin list --allow-root
 
 # redis status (in wordpress container)
 wp --path=/var/www/html redis status --allow-root
 
-# PING redis 
-redis-cli PING
-
 # enter in redis container
 docker exec -it redis redis-cli
+
+# PING redis 
+redis-cli PING
 
 # list all db caches
 INFO keyspace
