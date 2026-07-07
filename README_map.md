@@ -1,3 +1,13 @@
+- NGINX : reçoit les requêtes HTTPS et les transmet à WordPress.
+- WordPress : génère les pages dynamiques du site.
+- PHP-FPM : exécute le code PHP de WordPress.
+- MariaDB : stocke toutes les données du site.
+- Redis : met en cache les données pour accélérer WordPress.
+- Adminer : permet d'administrer MariaDB via une interface Web.
+- vsftpd : permet de modifier les fichiers WordPress via FTP.
+- Trivy : analyse les images Docker pour détecter des vulnérabilités connues.
+- Static : héberge un site web statique indépendant.
+
 # redis
 Redis sert de cache pour WordPress : au lieu que WordPress redemande toujours certaines informations à MariaDB, il peut stocker temporairement des résultats dans Redis. Il sert à éviter de refaire certaines requêtes SQL.
 
@@ -96,6 +106,9 @@ wp plugin list --allow-root
 # redis status (in wordpress container)
 wp --path=/var/www/html redis status --allow-root
 
+# PING redis 
+redis-cli PING
+
 # enter in redis container
 docker exec -it redis redis-cli
 
@@ -108,14 +121,20 @@ DBSIZE
 # delete all caches
 FLUSHDB
 
-# show ftp port
+# show exposed ftp port
 docker port vsftpd
 
 # show ftp user
 id $FTP_USER
 
+# connect to the ftp server and list the files
+lftp -u $FTP_USER,$FTP_PASSWORD ftp://127.0.0.1 && ls
+
 # show ftp share the same volume
 ls -la /var/www/html
+
+# get file ftp
+docker exec wordpress ls /var/www/html
 
 # web broswer adminer
 http://localhost:8080
