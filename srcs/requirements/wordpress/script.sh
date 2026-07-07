@@ -13,6 +13,11 @@ done
 
 echo "MariaDB is ready"
 
+# download wordpress in the volumes
+if [ ! -f /var/www/html/wp-load.php ]; then
+    wp core download --path=/var/www/html --allow-root
+fi
+
 # Config WordPress (idempotent)
 if [ ! -f /var/www/html/wp-config.php ]; then
     cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php

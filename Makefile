@@ -24,8 +24,8 @@ all: up
 # puis construit et démarre les conteneurs en arrière-plan
 # ---------------------------------------------------------------------------- #
 up:
-	mkdir -p /home/daniel/data/mariadb
-	mkdir -p /home/daniel/data/wordpress
+	mkdir -p /home/daafonso/data/mariadb
+	mkdir -p /home/daafonso/data/wordpress
 	$(COMPOSE) up -d --build
 
 # ---------------------------------------------------------------------------- #

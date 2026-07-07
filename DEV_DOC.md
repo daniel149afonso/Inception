@@ -178,7 +178,7 @@ make re
 Host:
 
 ```text
-/home/daniel/data/mariadb
+/home/daafonso/data/mariadb
 ```
 
 Container:
@@ -194,7 +194,7 @@ Container:
 Host:
 
 ```text
-/home/daniel/data/wordpress
+/home/daafonso/data/wordpress
 ```
 
 Container:
