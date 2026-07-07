@@ -71,18 +71,14 @@ ps:
 # ---------------------------------------------------------------------------- #
 clean:
 	$(COMPOSE) down -v
+	sudo rm -rf /home/daniel/data/mariadb
+	sudo rm -rf /home/daniel/data/wordpress
 
 # ---------------------------------------------------------------------------- #
-# Nettoyage complet de Docker
-# Supprime :
-# - les images inutilisées
-# - les conteneurs inutilisés
-# - les volumes inutilisés
-# - le cache de build
+# Supprime également les images construites par le projet
 # ---------------------------------------------------------------------------- #
 fclean: clean
-	docker system prune -af
-	docker volume prune -f
+	$(COMPOSE) down --rmi all
 
 # ---------------------------------------------------------------------------- #
 # Reconstruction complète du projet depuis zéro
