@@ -41,8 +41,11 @@ docker exec mariadb ss -ltnp
 # connect to mariadb (to use in the wordpress container)
 php -r '$c = new mysqli("mariadb", "wpuser", "TON_MOT_DE_PASSE", "wordpress"); if ($c->connect_error) { echo "ERREUR: ".$c->connect_error.PHP_EOL; exit(1); } echo "OK connexion MariaDB".PHP_EOL;'
 
-# connect to the server
-curl -k https://localhost
+# login page
+https://daafonso.42.fr/wp-login.php
+
+# connect to the nginx server
+curl -k -I https://daafonso.42.fr
 
 # check if WP-CLI exist in wordpress container
 docker exec wordpress wp --info --allow-root
@@ -100,20 +103,22 @@ volume Docker
 
 # Bonus:
 
-# list all wordpress plugin DANGER
-wp plugin list --allow-root
+# list all wordpress plugin
+wp plugin list --path=/var/www/html --allow-
+root
 
 # redis status (in wordpress container)
 wp --path=/var/www/html redis status --allow-root
 
-# enter in redis container
+# enter in redis client container
 docker exec -it redis redis-cli
 
-# PING redis 
+# PING redis (in redis container bash)
 redis-cli PING
 
-# list all db caches
-INFO keyspace
+# list all db caches(db number, keys, 11 keys have an expiration, ttl in ms)
+INFO keyspace 
+> db0:keys=84,expires=11,avg_ttl=119347203
 
 # count the number of keys
 DBSIZE
@@ -127,14 +132,17 @@ docker port vsftpd
 # show ftp user
 id $FTP_USER
 
-# connect to the ftp server and list the files
-lftp -u $FTP_USER,$FTP_PASSWORD ftp://127.0.0.1 && ls
+# connect to the ftp server and list the files of the wordpress volume
+lftp -u 'FTP_USER','FTP_PASSWORD' ftp://127.0.0.1 && ls
 
-# show ftp share the same volume
+# show ftp share the same volume (in wordpress container)
 ls -la /var/www/html
 
-# get file ftp
-docker exec wordpress ls /var/www/html
+# show the current path && change directory of the local machine
+lpwd, lcd
+
+# upload the image to the wordpress volume
+put image.png
 
 # web broswer adminer
 http://localhost:8080
