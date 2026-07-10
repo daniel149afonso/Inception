@@ -4,4 +4,5 @@ set -e
 
 echo "Trivy container is ready."
 
-tail -f /dev/null # running the container without stopping
+# running the container without stopping
+tail -f /dev/null

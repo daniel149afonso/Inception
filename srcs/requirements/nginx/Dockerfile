@@ -17,4 +17,5 @@ RUN mkdir -p /etc/nginx/ssl && \
 # use the default.conf file
 COPY default.conf /etc/nginx/sites-available/default
 
+# exec nginx
 CMD ["nginx", "-g", "daemon off;"]
